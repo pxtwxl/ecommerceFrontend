@@ -1,74 +1,53 @@
 # SmartCart Frontend
 
-This is the frontend for the SmartCart e-commerce platform, built with React and Vite. It provides a modern, responsive user interface for browsing products, managing a shopping cart, comparing items, and completing secure purchases via Stripe.
+SmartCart Frontend is a modern, responsive e-commerce web application built with React and Vite. It provides users with a seamless shopping experience, including product browsing, cart management, product comparison, order history, and secure payments via Stripe. The frontend is designed to work with the SmartCart Spring Boot backend API.
 
 **Live Demo:**  
 [https://ecommerce-ytty.onrender.com](https://ecommerce-ytty.onrender.com)
 
 ## Features
-- User authentication and registration
-- Product browsing by category
+- User registration and authentication
+- Browse products by category
 - Product search and comparison
-- Shopping cart management
-- Order history and user profile
-- Stripe payment integration
-- Responsive design with Bootstrap
+- Add, update, and remove items from the shopping cart
+- View order history and user profile
+- Stripe payment integration for secure checkout
+- Responsive design using Bootstrap
 
 ## Tech Stack
-- React
+- React 18
 - Vite
-- React Router
-- Bootstrap 5
+- React Router v6
+- Bootstrap 5 & Bootstrap Icons
 - Stripe (for payments)
 - Axios (for API requests)
 
 ## Backend API
-The frontend communicates with a Spring Boot backend deployed at:
+This frontend communicates with a Spring Boot backend deployed at render.
 
+Set this URL in your `.env.local` as:
 ```
-https://ecommercebackend-we06.onrender.com
+VITE_BACKEND_URL
 ```
-
-This URL is set in the frontend via the environment variable:
-
-```
-VITE_BACKEND_URL=https://ecommercebackend-we06.onrender.com
-```
-
-All API requests from the frontend are made to this backend URL.
-
-## Backend Repository
-The backend for this project is a Spring Boot REST API that handles authentication, product management, orders, payments (Stripe), and user data. It is designed to work seamlessly with this frontend.
-
-**GitHub Repository:**  
-[https://github.com/pxtwxl/ecommerceBackend](https://github.com/pxtwxl/ecommerceBackend)
-
-### Key Features
-- User authentication and authorization (JWT)
-- Product CRUD operations
-- Category and search endpoints
-- Order management
-- Stripe payment integration
-- Secure environment variable management
-- PostgreSQL database support
-
-You can find setup instructions, API documentation, and deployment details in the backend repository’s README.
 
 ## Getting Started
 1. Clone the repository.
-2. Install dependencies:  
-   `npm install`
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 3. Set up environment variables in `.env.local` (see `.env.example`).
-4. Run locally:  
-   `npm run dev`
+4. Run locally:
+   ```bash
+   npm run dev
+   ```
+
+## Deployment
+- Build the app with `npm run build`.
+- Deploy the contents of the `dist` folder to your preferred static hosting or as a Render Web Service using `npx serve -s dist`.
+
+## Backend Repository
+The backend for this project is available at:
+[https://github.com/pxtwxl/ecommerceBackend](https://github.com/pxtwxl/ecommerceBackend)
 
 ---
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
