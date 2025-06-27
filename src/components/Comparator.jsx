@@ -20,7 +20,7 @@ function App() {
         const productsWithImages = await Promise.all(
           res.data.map(async (product) => {
             try {
-              const imgRes = await axios.get(`http://localhost:8080/api/product/${product.id}/image`);
+              const imgRes = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/${product.id}/image`);
               if (imgRes.data && imgRes.data.trim() !== "" && imgRes.data !== "null") {
                 const imageUrl = `data:${product.imageType || "image/jpeg"};base64,${imgRes.data}`;
                 return { ...product, imageUrl };
@@ -29,8 +29,8 @@ function App() {
               }
             } catch (error) {
               try {
-                const response = await axios.get(`http://localhost:8080/api/product/${product.id}/imagename`);
-                const imageUrl = `http://localhost:8080${response.data}`;
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/product/${product.id}/imagename`);
+                const imageUrl = `${import.meta.env.VITE_BACKEND_URL}${response.data}`;
                 return { ...product, imageUrl };
               } catch (blobError) {
                 return { ...product, imageUrl: "/placeholder.jpg" };

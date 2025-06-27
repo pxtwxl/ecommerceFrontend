@@ -9,7 +9,7 @@ const StripeCheckout = ({ amount, cartItems }) => {
       // Save cartItems to localStorage for use after redirect
       localStorage.setItem("stripeCartItems", JSON.stringify(cartItems));
       const response = await axios.post(
-        "/api/payment/create-stripe-session",
+        `${import.meta.env.VITE_BACKEND_URL}/api/payment/create-stripe-session`,
         {
           amount,
           cartItems,

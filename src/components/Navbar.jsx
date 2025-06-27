@@ -27,7 +27,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
 
   const fetchData = async (value) => {
     try {
-      const response = await axios.get("http://localhost:8080/api/products");
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
       setSearchResults(response.data);
       console.log(response.data);
     } catch (error) {
@@ -41,7 +41,7 @@ const Navbar = ({ onSelectCategory, onSearch }) => {
       setShowSearchResults(true)
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/products/search?keyword=${value}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/products/search?keyword=${value}`
       );
       setSearchResults(response.data);
       setNoResults(response.data.length === 0);

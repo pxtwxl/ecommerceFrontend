@@ -32,7 +32,7 @@ const MyProducts = () => {
                 const imgNameRes = await axios.get(
                   `api/product/${product.id}/imagename`
                 );
-                const imageUrl = `http://localhost:8080${imgNameRes.data}`;
+                const imageUrl = `${import.meta.env.VITE_BACKEND_URL}${imgNameRes.data}`;
                 return { ...product, imageUrl };
               } catch (blobError) {
                 return { ...product, imageUrl: "/placeholder.jpg" };

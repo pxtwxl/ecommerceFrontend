@@ -18,7 +18,7 @@ const CategoryPage = () => {
           res.data.map(async (product) => {
             try {
               const imgRes = await axios.get(
-                `http://localhost:8080/api/product/${product.id}/image`
+                `${import.meta.env.VITE_BACKEND_URL}/api/product/${product.id}/image`
               );
               if (imgRes.data && imgRes.data.trim() !== "" && imgRes.data !== "null") {
                 const imageUrl = `data:${product.imageType || "image/jpeg"};base64,${imgRes.data}`;
@@ -29,9 +29,9 @@ const CategoryPage = () => {
             } catch (error) {
               try {
                 const response = await axios.get(
-                  `http://localhost:8080/api/product/${product.id}/imagename`
+                  `${import.meta.env.VITE_BACKEND_URL}/api/product/${product.id}/imagename`
                 );
-                const imageUrl = `http://localhost:8080${response.data}`;
+                const imageUrl = `${import.meta.env.VITE_BACKEND_URL}${response.data}`;
                 return { ...product, imageUrl };
               } catch (blobError) {
                 return { ...product, imageUrl: "/placeholder.jpg" };

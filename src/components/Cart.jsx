@@ -11,6 +11,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartImage, setCartImage] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [stripeCheckout, setStripeCheckout] = useState(false);
 
   useEffect(() => {
     const fetchImagesAndUpdateCart = async () => {
@@ -36,7 +37,7 @@ const Cart = () => {
                 const response = await axios.get(
                   `api/product/${item.id}/imagename`
                 );
-                const imageUrl = `http://localhost:8080${response.data}`;
+                const imageUrl = `${import.meta.env.VITE_BACKEND_URL}${response.data}`;
                 return { ...item, imageUrl };
               } catch (blobError) {
                 return { ...item, imageUrl: "/placeholder.jpg" };
@@ -119,6 +120,10 @@ const Cart = () => {
     }
   };
 
+  const handleStripeCheckout = () => {
+    setStripeCheckout(true);
+  };
+
   return (
     <div className="cart-container" >
       <div className="shopping-cart" style={{ marginTop: 100 }}>
@@ -190,13 +195,15 @@ const Cart = () => {
             <Button
               className="btn btn-primary"
               style={{ width: "100%" }}
-              onClick={() => setShowModal(true)}
+              onClick={handleStripeCheckout}
             >
               Checkout
             </Button>
-            <div style={{ width: '100%', margin: '16px 0' }}>
-              <StripeCheckout amount={totalPrice} cartItems={cartItems} />
-            </div>
+            {stripeCheckout && (
+              <div style={{ width: '100%', margin: '16px 0' }}>
+                <StripeCheckout amount={totalPrice} cartItems={cartItems} />
+              </div>
+            )}
           </>
         )}
       </div>

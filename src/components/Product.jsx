@@ -15,13 +15,13 @@ const Product = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/product/${id}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/product/${id}`
         );
         const prod = response.data;
         // Use the same image loading approach as in Home.jsx and MyProducts.jsx
         try {
           const res = await axios.get(
-            `http://localhost:8080/api/product/${prod.id}/image`
+            `${import.meta.env.VITE_BACKEND_URL}/api/product/${prod.id}/image`
           );
           if (res.data && res.data.trim() !== "" && res.data !== "null") {
             const imageUrl = `data:${prod.imageType || "image/jpeg"};base64,${res.data}`;
@@ -32,9 +32,9 @@ const Product = () => {
         } catch (error) {
           try {
             const imgNameRes = await axios.get(
-              `http://localhost:8080/api/product/${prod.id}/imagename`
+              `${import.meta.env.VITE_BACKEND_URL}/api/product/${prod.id}/imagename`
             );
-            const imageUrl = `http://localhost:8080${imgNameRes.data}`;
+            const imageUrl = `${import.meta.env.VITE_BACKEND_URL}${imgNameRes.data}`;
             setProduct({ ...prod, imageUrl });
           } catch (blobError) {
             setProduct({ ...prod, imageUrl: "/placeholder.jpg" });
@@ -49,7 +49,7 @@ const Product = () => {
 
   const deleteProduct = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/product/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/product/${id}`);
       removeFromCart(id);
       console.log("Product deleted successfully");
       alert("Product deleted successfully");
